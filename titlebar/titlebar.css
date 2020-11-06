@@ -1,0 +1,64 @@
+.topBar {
+    height: 28px;
+    z-index: 100;
+    width: 100%;
+    background: transparent;
+    border-bottom: 1px solid #ECEFF1;
+    box-sizing: border-box;
+}
+h1.logo {
+    display: inline-block;
+    font-family: 'Nunito';
+    font-weight: bold;
+    padding: 6px 0px 6px 8px;
+    color: #505050;
+    font-size: 14px;
+}
+.logo img {
+    height: 12px;
+    padding: 1px 0px 0px 0px;
+}
+
+#closeApp{
+    background: none;
+    -webkit-app-region: no-drag;
+    border: solid 0px transparent;
+    float: right;
+    height: 28px;
+    width: 34px;
+    font-weight: 900;
+    outline: none;
+    transition: 0.3s background;
+    cursor: pointer;
+}
+#maximizeApp{
+    background: none;
+    -webkit-app-region: no-drag;
+    border: solid 0px transparent;
+    float: right;
+    height: 28px;
+    width: 34px;
+    outline: none;
+    transition: 0.3s background;
+    cursor: pointer;
+}
+#minimizeApp {
+    background: none;
+    -webkit-app-region: no-drag;
+    border: solid 0px transparent;
+    float: right;
+    height: 28px;
+    width: 34px;
+    outline: none;
+    transition: 0.3s background;
+    font-weight: bold;
+    cursor: pointer;
+}
+#minimizeApp:hover, #maximizeApp:hover, #pinWindow:hover {
+    background: #00000010 !important;
+    outline: none;
+}
+#closeApp:hover{
+    background: #e10000c6 !important;
+    outline: none;
+}

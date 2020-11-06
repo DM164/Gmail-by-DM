@@ -1,0 +1,34 @@
+{
+  "name": "gmail-by-dm",
+  "productName": "Gmail by DM",
+  "version": "0.1.0",
+  "description": "Gmail desktop client.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package-win": "electron-packager . \"Gmail by DM\" --overwrite --asar --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=O:/GmailbyDM/packaged --version-string.CompanyName=\"Grandpa Mining\"",
+    "package-linux": "electron-packager .  gmail-by-dm --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=../packaged",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "setup": "electron-installer-windows --src \"O:/GmailbyDM/packaged/Gmail by DM-win32-ia32/\" --dest O:/GmailbyDM/installers/win --options.exe \"Gmail by DM.exe\" --options.icon assets/icons/win/icon.ico",
+    "setup-debian": "electron-installer-debian --src \"../packaged/gmail-by-dm-linux-x64/\" --dest ../installers/linux/ --options.icon assets/icons/png/icon.png --arch amd64",
+    "setup-mac": "electron-installer-dmg \"release-builds/Gmail by DM-win32-ia32/\" \"Gmail by DM\""
+  },
+  "repository": "https://github.com/DM164/Gmail-by-DM",
+  "author": "Denis Mignanelli",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^10.1.5",
+    "electron-packager": "^15.0.0"
+  },
+  "dependencies": {
+    "electron-dl": "^3.0.1",
+    "firebase": "^7.15.4",
+    "nucleus-nodejs": "^3.0.6"
+  },
+  "build": {
+    "appId": "your.id",
+    "mac": {
+      "category": "your.app.category.type"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+body {
+    /* background: #1A1F29; */
+    -webkit-user-drag: none;
+    user-select: none;
+}
+.topBar {
+    height: 28px;
+    z-index: 100;
+    width: 100%;
+    background: transparent;
+    border-bottom: 1px solid #ECEFF1;
+    box-sizing: border-box;
+}
+h1.logo {
+    display: inline-block;
+    font-family: 'Nunito';
+    font-weight: bold;
+    padding: 6px 0px 6px 8px;
+    color: #505050;
+    font-size: 14px;
+}
+.logo img {
+    height: 12px;
+    padding: 1px 0px 0px 0px;
+}
+
+button#no-button {
+    position: relative;
+    background: #ffffff;
+    color: #252525;
+    border: 1px solid #dadada;
+    padding: 4px 16px;
+    border-radius: 4px;
+    font-family: 'Lexend Deca';
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    transition: filter 0.3s;
+}
+button#close {
+    position: relative;
+    background: #4285F4;
+    color: #ffffff;
+    border: 1px solid #4285F4;
+    padding: 4px 16px;
+    border-radius: 4px;
+    font-family: 'Lexend Deca';
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    transition: filter 0.3s;
+}
+.warning-buttons {
+    display: inline-block;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+button#close:hover, button#no-button:hover{
+    filter: brightness(0.9);
+    /* border: 1px solid #45536e; */
+}
+h1.warning-text {
+    font-family: 'Lexend Deca';
+    display: inline-block;
+    margin: 4%;
+    font-size: 16px;
+    line-height: 20px;
+    color: #424242;
+    /* font-weight: bold; */
+    text-shadow: 0 0 0px #ababab;
+}

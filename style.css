@@ -1,0 +1,10 @@
+html, body {
+    height: 100%;
+}
+#inbox {
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0px;
+    top: 28px;
+}
