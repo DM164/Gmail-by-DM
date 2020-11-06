@@ -1,7 +1,5 @@
 let cachedVersion = ''
 function checkForUpdates() {
-    document.getElementById('update-status').innerText = 'Checking for updates...'
-
     const Http = new XMLHttpRequest();
     let platform = remote.process.platform
     if (platform === 'linux'){ platform = 'debian' }
@@ -48,3 +46,7 @@ ipcRenderer.on('download-successfull', () => {
         installUpdate()
     }, 4000);
 })
+
+setTimeout(() => {
+    checkForUpdates()
+}, 60000);
