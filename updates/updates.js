@@ -15,10 +15,8 @@ function checkForUpdates() {
         }
         if (cachedVersion > remote.app.getVersion()) {
             console.log('Update required!')
-            document.getElementById('update-status').innerText = 'Update available!'
             ipcRenderer.send('download-update')
         } else {
-            document.getElementById('update-status').innerText = 'No update available.'
             console.log('No update required')
         }
     }
