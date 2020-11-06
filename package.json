@@ -1,7 +1,7 @@
 {
   "name": "gmail-by-dm",
   "productName": "Gmail by DM",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Gmail desktop client.",
   "main": "main.js",
   "scripts": {
