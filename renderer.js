@@ -1,5 +1,6 @@
 const electron = require('electron');
 const { ipcRenderer, shell, remote } = electron;
+const path = require('path');
 
 const webview = document.getElementById('inbox');
 
