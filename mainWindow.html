@@ -73,6 +73,8 @@
     document.getElementById('inbox').addEventListener('dom-ready', function () {
         // document.getElementById('inbox').openDevTools()
         // document.getElementById('inbox').insertCSS('*{background: black; !important}')
+        // fix update platform
+        localStorage.setItem('platform', remote.process.platform)
     })
 
     document.getElementById('inbox').addEventListener('new-window', (e) => {

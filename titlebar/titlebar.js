@@ -1,5 +1,3 @@
-const { remote } = require('electron');
-
 // Topbar
 document.getElementById("closeApp").addEventListener("click", function (e){
     const window = remote.getCurrentWindow();

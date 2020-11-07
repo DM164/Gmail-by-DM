@@ -5,7 +5,7 @@ const fs = require('fs');
 const { download } = require('electron-dl');
 const { webContents } = require('electron');
 
-const { app, BrowserWindow, Menu, ipcMain } = electron;
+const { app, BrowserWindow, Menu, ipcMain, remote } = electron;
 
 // Installation of the app
 //empty object if on a mac

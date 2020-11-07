@@ -30,7 +30,7 @@
         const { remote } = require('electron');
         const { read } = require('fs');
 
-        let platform = remote.process.platform
+        let platform = localStorage.getItem('platform')
         if (platform === 'linux'){ platform = 'debian' }
         const url = `https://update-server-gmail-by-dm.grandpamining.vercel.app/download/${platform}/`;
 
