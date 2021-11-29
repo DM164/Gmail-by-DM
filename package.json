@@ -1,7 +1,7 @@
 {
   "name": "gmail-by-dm",
   "productName": "Gmail by DM",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Gmail desktop client.",
   "main": "main.js",
   "scripts": {
@@ -17,13 +17,11 @@
   "author": "Denis Mignanelli",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^10.1.5",
+    "electron": "^16.0.0",
     "electron-packager": "^15.0.0"
   },
   "dependencies": {
-    "electron-dl": "^3.0.1",
-    "firebase": "^7.15.4",
-    "nucleus-nodejs": "^3.0.6"
+    "electron-dl": "^3.0.1"
   },
   "build": {
     "appId": "your.id",

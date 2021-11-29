@@ -1,0 +1,30 @@
+.topBar {
+    height: 28px;
+    z-index: 100;
+    width: 100%;
+    background: transparent;
+    border-bottom: 1px solid #ECEFF1;
+    box-sizing: border-box;
+}
+
+h1.logo {
+    display: block;
+    font-family: 'Nunito';
+    font-weight: bold;
+    padding: 6px 0px 6px 8px;
+    color: #505050;
+    font-size: 14px;
+    text-align: center;
+    align-items: center;
+}
+
+.logo img {
+    height: 12px;
+    padding: 1px 0px 0px 0px;
+}
+
+#closeApp,
+#maximizeApp,
+#minimizeApp {
+    display: none;
+}

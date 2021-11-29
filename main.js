@@ -5,13 +5,10 @@ const fs = require('fs');
 const { download } = require('electron-dl');
 const { webContents } = require('electron');
 
-const { app, BrowserWindow, Menu, ipcMain, remote } = electron;
+const { app, BrowserWindow, Menu, ipcMain, remote, shell } = electron;
 
 // Installation of the app
-//empty object if on a mac
-if (process.platform == 'darwin') {
-    mainMenuTemplate.unshift({});
-}
+
 // this should be placed at top of main.js to handle setup events quickly
 if (handleSquirrelEvent()) {
     // squirrel event handled and app will exit in 1000ms, so don't do anything else
@@ -94,30 +91,33 @@ app.on("ready", function () {
 function createInstance() {
     //create new window
     mainWindow = new BrowserWindow({
-        webPreferences: { nodeIntegration: true, enableRemoteModule: true, webviewTag: true },
         frame: false,
         icon: path.join(__dirname, 'assets/icons/png/icon.png'),
         width: 1000,
         backgroundColor: '#fff',
         'minHeight': 500,
         'minWidth': 780,
-        show: false
+        show: false,
+        webPreferences: {
+            experimentalFeatures: true,
+            nodeIntegration: true, //remove in future Electron version
+            contextIsolation: false,
+            webviewTag: true
+        },
+        show: false,
+        titleBarStyle: 'hidden'
     });
     // Load HTML into window
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'mainWindow.html'),
         protocol: 'file:',
         slashes: true
-    }), {userAgent: 'Mozilla/5.0 (X11; Linux i686; rv:82.0) Gecko/20100101 Firefox/82.0'});
+    }), { userAgent: 'Mozilla/5.0 (X11; Linux i686; rv:82.0) Gecko/20100101 Firefox/82.0' });
 
     //Quit app when closed
     mainWindow.on("closed", function () {
         app.quit();
     })
-
-    //Insert menu shortcuts
-    const topMenu = Menu.buildFromTemplate(mainMenuTemplate);
-    Menu.setApplicationMenu(topMenu)
 }
 
 ipcMain.on('app:relaunch', () => {
@@ -163,7 +163,8 @@ function createDownloadDialog() {
         icon: path.join(__dirname, 'assets/icons/png/icon.png'),//change later
         webPreferences: {
             experimentalFeatures: true,
-            nodeIntegration: true
+            nodeIntegration: true,
+            contextIsolation: false
         },
         show: false
     });
@@ -181,53 +182,35 @@ function createDownloadDialog() {
     })
 }
 
-function zoomin() {
-    mainWindow.webContents.send('zoomin');
-}
-function zoomout() {
-    mainWindow.webContents.send('zoomout');
-}
+// handle remote in electron 14
+ipcMain.handle('app-version', async (e) => {
+    return app.getVersion()
+})
+ipcMain.handle('app-platform', async (e) => {
+    return process.platform
+})
+ipcMain.on('browser', (e, arg) => {
+    shell.openExternal(arg);
+})
 
-//Shortcuts and Menubar
-// New top menu template (edit, view, ect.) (we used it for shortcuts)
-const mainMenuTemplate = [
-    {
-        label: 'File',
-        submenu: [
-            {
-                label: 'Quit',
-                accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q', //shortcut to quit, checks if the app is running on win32 or on darwin(MacOS)
-                click() {
-                    app.quit();
-                }
-            },
-            {
-                label: 'Restart',
-                accelerator: process.platform == 'darwin' ? 'Command+R' : 'Ctrl+R', //shortcut to quit, checks if the app is running on win32 or on darwin(MacOS)
-                click() {
-                    app.relaunch();
-                    app.quit();
-                }
-            },
-            {
-                label: 'DevTools',
-                accelerator: process.platform == 'darwin' ? 'Command+Shift+I' : 'Ctrl+Shift+I', //shortcut to quit, checks if the app is running on win32 or on darwin(MacOS)
-                role: 'toggleDevTools'
-            },
-            {
-                label: 'Zoom in',
-                accelerator: process.platform == 'darwin' ? 'Command+=' : 'Ctrl+=', //shortcut to quit, checks if the app is running on win32 or on darwin(MacOS)
-                click() {
-                    zoomin()
-                }
-            },
-            {
-                label: 'Zoom out',
-                accelerator: process.platform == 'darwin' ? 'Command+-' : 'Ctrl+-', //shortcut to quit, checks if the app is running on win32 or on darwin(MacOS)
-                click() {
-                    zoomout()
-                }
-            }
-        ]
+ipcMain.on('handle-window-buttons', (e, arg) => {
+    switch (arg) {
+        case 'close':
+            mainWindow.close()
+            break;
+        case 'minimize':
+            mainWindow.minimize()
+            break
+        case 'maximize':
+            mainWindow.maximize()
+            break
+        case 'unmaximize':
+            mainWindow.unmaximize()
+            break
+        default:
+            break;
     }
-]
+})
+ipcMain.on('cancelUpdate', () => {
+    downloadWindow.close()
+})

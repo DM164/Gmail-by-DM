@@ -6,7 +6,6 @@
     <title>Gmail by DM</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="titlebar/titlebar.css">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="offline-resources/fonts.css">
@@ -70,13 +69,6 @@
 </body>
 <script defer>
     // Inject custom CSS
-    document.getElementById('inbox').addEventListener('dom-ready', function () {
-        // document.getElementById('inbox').openDevTools()
-        // document.getElementById('inbox').insertCSS('*{background: black; !important}')
-        // fix update platform
-        localStorage.setItem('platform', remote.process.platform)
-    })
-
     document.getElementById('inbox').addEventListener('new-window', (e) => {
         e.preventDefault()
         console.log('new window event called');
