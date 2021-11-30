@@ -5,7 +5,7 @@ const fs = require('fs');
 const { download } = require('electron-dl');
 const { webContents } = require('electron');
 
-const { app, BrowserWindow, Menu, ipcMain, remote, shell } = electron;
+const { app, BrowserWindow, Menu, ipcMain, shell } = electron;
 
 // Installation of the app
 
@@ -191,6 +191,9 @@ ipcMain.handle('app-platform', async (e) => {
 })
 ipcMain.on('browser', (e, arg) => {
     shell.openExternal(arg);
+})
+ipcMain.handle('getWindowStatus', async (e) => {
+    return mainWindow.isMaximized()
 })
 
 ipcMain.on('handle-window-buttons', (e, arg) => {

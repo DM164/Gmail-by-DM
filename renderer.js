@@ -19,12 +19,17 @@ ipcRenderer.invoke('app-platform').then((arg) => {
 
 const webview = document.getElementById('inbox');
 
-// Change Useragent to Chrome in order to avoid the app being blocked by Google
-webview.setUserAgent('Mozilla/5.0 (X11; Linux i686; rv:82.0) Gecko/20100101 Firefox/82.0')
+webview.addEventListener('new-window', async (e) => {
+  const protocol = (new URL(e.url)).protocol
+  if (protocol === 'http:' || protocol === 'https:') {
+    await shell.openExternal(e.url)
+  }
+})
 
 // Inject custom CSS
 webview.addEventListener('dom-ready', function () {
-    // webview.insertRule('')
+    // Change Useragent to Chrome in order to avoid the app being blocked by Google
+    webview.setUserAgent('Mozilla/5.0 (X11; Linux i686; rv:82.0) Gecko/20100101 Firefox/82.0')
 })
 
 // Set zoom level

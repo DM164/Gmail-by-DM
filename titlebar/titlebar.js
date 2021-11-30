@@ -23,7 +23,6 @@ loadTopBar(localStorage.getItem('platform'))
 
 // button functionality
 document.getElementById("closeApp").addEventListener("click", function (e) {
-    sync()
     ipcRenderer.send('handle-window-buttons', 'close')
 });
 

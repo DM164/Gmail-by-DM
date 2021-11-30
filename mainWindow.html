@@ -67,22 +67,4 @@
 
     <webview id="inbox" src="https://mail.google.com" useragent="Mozilla/5.0 (X11; Linux i686; rv:82.0) Gecko/20100101 Firefox/82.0"></webview>
 </body>
-<script defer>
-    // Inject custom CSS
-    document.getElementById('inbox').addEventListener('new-window', (e) => {
-        e.preventDefault()
-        console.log('new window event called');
-        const protocol = require('url').parse(e.url).protocol
-
-        if (e.url.slice(0, 36) === 'https://mail.google.com/mail/data/u/'){
-            document.getElementById('inbox').loadURL(e.url, {userAgent: 'Mozilla/5.0 (X11; Linux i686; rv:82.0) Gecko/20100101 Firefox/82.0'})
-        } else if (e.url === 'https://accounts.google.com/AddSession?hl=en&continue=https://mail.google.com/mail&service=mail'){
-            document.getElementById('inbox').loadURL(e.url, {userAgent: 'Mozilla/5.0 (X11; Linux i686; rv:82.0) Gecko/20100101 Firefox/82.0'})
-        } else if (protocol === 'http:' || protocol === 'https:') {
-            shell.openExternal(e.url)
-        }
-    });
-
-</script>
-
 </html>
